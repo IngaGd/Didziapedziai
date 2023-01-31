@@ -74,7 +74,8 @@ if (racoons3) {
     console.log('no');
 }
 
-//undefined - neapsisprendes kintamasis, kuo nori buti, if-e paverciamas i false
+//undefined - neapsisprendes kintamasis, kuo nori buti, 
+//if-e paverciamas i false
 
 //NaN taip pat false rez
 let racoons5 = 'a';
