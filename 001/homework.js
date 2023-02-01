@@ -29,3 +29,21 @@ console.log(arr3);
 //const newItems = [...Array(10)].map(_ => (parseInt(Math.random() * (26 - 5)) + 5));
 const newArr = [...arr, ...[...Array(10)].map(_ => (parseInt(Math.random() * (26 - 5)) + 5))];
 console.log(newArr);
+
+//f) Iš masyvo elementų sukurkite du naujus masyvus. Vienas turi būti sudarytas iš neporinių indeksų reikšmių, 
+// o kitas iš porinių (pagal neporinį - porinį indeksą, ne reikšmę);
+
+let arrEvenIndex = [];
+let arrOddIndex = [];
+for (let i = 0; i <= newArr.length; i++) {
+    if (i % 2 === 0) {
+        arrEvenIndex.push(newArr[i]);
+    } else {
+        arrOddIndex.push(newArr[i]);
+    }
+}
+console.log(arrEvenIndex);
+console.log(arrOddIndex);
+
+//g) Pirminio masyvo elementus su poriniais indeksais padarykite lygius 0 jeigu jie didesni už 15;
+
