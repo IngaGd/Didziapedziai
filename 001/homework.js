@@ -35,7 +35,7 @@ console.log(newArr);
 
 let arrEvenIndex = [];
 let arrOddIndex = [];
-for (let i = 0; i <= newArr.length; i++) {
+for (let i = 0; i < newArr.length; i++) {
     if (i % 2 === 0) {
         arrEvenIndex.push(newArr[i]);
     } else {
@@ -46,4 +46,8 @@ console.log(arrEvenIndex);
 console.log(arrOddIndex);
 
 //g) Pirminio masyvo elementus su poriniais indeksais padarykite lygius 0 jeigu jie didesni už 15;
+const arr5 = arrEvenIndex.map(n => n <= 15 ? n : 0);
+console.log(arr5);
+
+//h) Suraskite pirmą (mažiausią) indeksą, kurio elemento reikšmė didesnė už 10;
 
