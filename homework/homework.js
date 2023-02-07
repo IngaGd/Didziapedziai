@@ -40,12 +40,32 @@ console.log('arrEvenIndex', arrEvenIndex);
 const arrOddIndex = [...newArr].filter((el, index) => index % 2 !== 0 ? el : 0);
 console.log('arrOddIndex', arrOddIndex);
 //g) Pirminio masyvo elementus su poriniais indeksais padarykite lygius 0 jeigu jie didesni už 15;
-const arr5 = [...arrOddIndex].map(n => n <= 15 ? n : 0);
+const arr5 = [...arrEvenIndex].map(n => n <= 15 ? n : 0);
 console.log(arr5);
 
 //h) Suraskite pirmą (mažiausią) indeksą, kurio elemento reikšmė didesnė už 10;
-const index = [...arrEvenIndex].forEach((num, i) => num > 10 ? i : 0);
+for (const [i, num] of arr5.entries()) {
+    if (num > 10) {
+        console.log('pirmas indexas skaiciaus > 10:', i);
+        break;
+    }
+}
+const index = [...arr5].filter((el, i) => el > 10 ? console.log(i) : 0);
 
 // 3. Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, C ir D, o ilgis 200. 
-//Suskaičiuokite kiek yra kiekvienos raidės.
+
+//Array.from({ length: 5 }, (v, i) => i);
 const l = ['A', 'B', 'C', 'D'];
+const arr6 = Array.from({ length: 200 }, () => l[Math.floor(Math.random() * l.length)]);
+console.log(arr6);
+
+//Suskaičiuokite kiek yra kiekvienos raidės.
+const countA = arr6.filter((el) => el === 'A' ? el : 0).length;
+const countB = arr6.filter((el) => el === 'B' ? el : 0).length;
+const countC = arr6.filter((el) => el === 'C' ? el : 0).length;
+const countD = arr6.filter((el) => el === 'D' ? el : 0).length;
+console.log('A sum:', countA, 'B sum:', countB, 'C sum:', countC, 'D sum:', countD);
+
+//4. Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą.Sudėkite masyvus, sudėdami atitinkamas reikšmes.
+//Paskaičiuokite kiek unikalių(po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.
+
