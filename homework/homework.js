@@ -69,3 +69,7 @@ console.log('A sum:', countA, 'B sum:', countB, 'C sum:', countC, 'D sum:', coun
 //4. Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą.Sudėkite masyvus, sudėdami atitinkamas reikšmes.
 //Paskaičiuokite kiek unikalių(po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.
 
+
+//Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 iki 999. Masyvų ilgiai 100.
+// Masyvų reikšmės turi būti unikalios savo masyve (t.y. neturi kartotis).
+
