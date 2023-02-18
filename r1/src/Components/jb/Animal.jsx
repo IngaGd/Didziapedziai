@@ -2,7 +2,7 @@ import rand from '../../Functions/rand';
 import ShowName from './ShowName';
 
 function Animal({color, animalName, h1Class}) { //kad zinoti, kas perduodama, susirasom
-    //const fox = <u>FOX number: {rand(100, 199)}</u>;
+    //const fox = <u>FOX number: {rand(100, 199)}</u>; // u - elementu kurimas
     //const labas = <i>Labas</i>;
 
     //galime apsirasyti kintamuosius ir {} - js metodus
