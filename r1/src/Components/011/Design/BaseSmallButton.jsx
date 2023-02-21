@@ -1,8 +1,8 @@
-function BaseButton({title, clickHandler}) {
+function BaseSmallButton({title, clickHandler}) {
 
     return (
-        <button className="small coral" onClick={clickHandler}>{title}</button>
+        <button className="small" onClick={clickHandler}>{title}</button>
     )
 }
 
-export default BaseButton;
+export default BaseSmallButton;
