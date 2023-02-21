@@ -68,8 +68,34 @@ console.log('A sum:', countA, 'B sum:', countB, 'C sum:', countC, 'D sum:', coun
 
 //4. Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą.Sudėkite masyvus, sudėdami atitinkamas reikšmes.
 //Paskaičiuokite kiek unikalių(po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.
+const arr7 = Array.from({ length: 200 }, () => [...l][Math.floor(Math.random() * [...l].length)]);
+console.log(arr7);
+const arr8 = Array.from({ length: 200 }, () => [...l][Math.floor(Math.random() * [...l].length)]);
+console.log(arr8);
+const arr9 = Array.from({ length: 200 }, () => [...l][Math.floor(Math.random() * [...l].length)]);
+console.log(arr9);
+const arraySum = arr7.concat(arr8, arr9);
+console.log('sum:', arraySum);
 
-
-//Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 iki 999. Masyvų ilgiai 100.
+//5. Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 iki 999. Masyvų ilgiai 100.
 // Masyvų reikšmės turi būti unikalios savo masyve (t.y. neturi kartotis).
+const randomSet1 = new Set();
 
+do {
+    const genDigit = parseInt(Math.random() * (1000 - 100) + 100);
+    randomSet1.add(genDigit);
+} while (randomSet1.size < 100);
+
+console.log([...randomSet1]);
+
+const randomSet2 = new Set();
+
+do {
+    const genDigit = parseInt(Math.random() * (1000 - 100) + 100);
+    randomSet2.add(genDigit);
+} while (randomSet2.size < 100);
+
+console.log([...randomSet2]);
+
+//6. Sugeneruokite masyvą, kuris būtų sudarytas iš reikšmių, 
+//kurios yra pirmame 5 uždavinio masyve, bet nėra antrame 5 uždavinio masyve.
