@@ -237,12 +237,27 @@ button {
 
 //----------------------------HOMEWORKS
 
-// 02 - TASTK1
+// 02 REACT BASE LIST
 
+//TASTK1
 .square {
     width: 100px;
     height: 100px;
     border: 2px solid yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    font-size: 20px;
+    text-align: center
+}
+
+//TASTK2
+.hw-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid orange;
     display: flex;
     align-items: center;
     justify-content: center;

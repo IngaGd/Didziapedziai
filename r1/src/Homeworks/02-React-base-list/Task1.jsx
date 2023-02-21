@@ -7,3 +7,5 @@ function Task1({dogs}) {
 }
 
 export default Task1;
+
+// Atvaizduoti masyvą dogs. Kiekvienas šuo atskirame kvadrate.
