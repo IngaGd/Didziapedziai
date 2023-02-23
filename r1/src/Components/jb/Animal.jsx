@@ -22,7 +22,7 @@ function Animal({color, animalName, h1Class}) { //kad zinoti, kas perduodama, su
             fontSize: rand(20, 50) + 'px', //keisis srifto dydis refreshinant
             letterSpacing: rand(0, 1) ? '5px' : null,//grazinimas null reiksia, kad salyga nepritaikyta
             fontFamily,
-        }}><ShowName animalName={animalName} fontFamily={fontFamily}/> No: { //stilius reacte negali buti sgtringas, jis yra obj
+        }}><ShowName animalName={animalName} fontFamily={fontFamily}/> No: { //stilius reacte negali buti stringas, jis yra obj
             rand(11, 15)    // viduriniai geltoni {} - nurodo js obj
         }</h1>
     )

@@ -1,10 +1,10 @@
-function Task2({dogs}) {
+function Task2({props}) {
 
-    const sortedDogs = () => [...dogs].sort((a, b) => b.length - a.length);
+    const list = () => props.map((a) => a);
 
     return (
         <div className="hw-circle">
-            {sortedDogs()}
+            {list}
         </div>
     )
 }
