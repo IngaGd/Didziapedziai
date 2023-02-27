@@ -32,6 +32,7 @@
                     border: 1px solid skyblue;
                     margin: 5px;
                     align-self: stretch;
+                    position: relative;
                 }
             }
         }
@@ -143,6 +144,52 @@
     }
 }
 
+.loader {
+    text-align: center;
+    color: white;
+    font-size: 100px;
+}
+
+.delete-button {
+    &::after {
+        content: '\2613';
+        color: crimson;
+        font-size: 26px;
+        line-height: 1;
+        display: block;
+        cursor: pointer;
+        padding: 0 0 0 20px;
+    }
+}
+
+.delete-modal {
+    position: absolute;
+    left: -65px;
+    top: -10px;
+    width: 300px;
+    height: 50px;
+    background-color: crimson;
+    z-index: 200;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 7px;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    span {
+        display: block;
+        font-size: 30px;
+        cursor: pointer;
+        margin-left: 20px;
+        padding: 0 10px;
+        border: 1px solid white;
+    }
+}
+
+//----------------BUTTON
 $butonBlue: skyblue;
 $butonGray: gray;
 $butonRed: crimson;

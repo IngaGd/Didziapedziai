@@ -30,9 +30,10 @@ function Create({setCreateData}) {
     }
 
     return (
+        <>
         <div className="dice-edit-create">
             <div className="dice-bin">
-
+                CREATE
                 <div className="dice-frame">
                     <div className={'dice _' + number} style={{
                         fontSize: size + 'px',
@@ -69,6 +70,7 @@ function Create({setCreateData}) {
 
             </div>
         </div>
+        </>
     )
 }
 

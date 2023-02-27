@@ -1,4 +1,17 @@
-function List({list}) {
+import Delete from "./Delete";
+
+function List({list, setDeleteModal, deleteModal, setDeleteData}) {
+
+    if (null === list) { //jei useState(null), vadinasi dar negavom is serverio jokiu duomenu
+        return (
+            <div className="list">
+                <div className="loader">
+                    LOADING...
+                </div>
+            </div>            
+        )
+    }
+
     return (
         <div className="list">
 
@@ -8,6 +21,10 @@ function List({list}) {
                             fontSize: d.size + 'px',
                             color: d.color
                     }}></div>
+                    <div className="delete-button" onClick={() => setDeleteModal(d)}></div>
+                    {
+                        deleteModal && deleteModal.id === d.id ? <Delete dice={d} setDeleteModal={setDeleteModal} setDeleteData={setDeleteData}/> : null
+                    }
                 </div>)
             }
 

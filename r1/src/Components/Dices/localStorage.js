@@ -21,3 +21,9 @@ export const create = (key, data) => {
     allData.push(data); // i nuskaitytus duomenis pridedam atsiusta
     write(key, allData); // ir vel viska irasome i localStorage
 }
+
+export const destroy = (key, id) => {
+    const allData = read(key); // nuskaitom
+    const deleteData = allData.filter(d => id !== d.id);
+    write(key, deleteData);
+}
