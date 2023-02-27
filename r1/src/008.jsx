@@ -52,6 +52,7 @@ function App() {
                     {
                         data.map((a, i) => <AnimalLi key={a.id} animal={a} index={i}/>)
                     }
+                    {/* {data map grazina pakeista masyva} */}
                 </ul>
             </div>
          

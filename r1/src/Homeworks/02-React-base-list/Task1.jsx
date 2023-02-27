@@ -1,7 +1,7 @@
-function Task1({dogs}) {
+function Task1({cat}) {
     return (
         <div className="square">
-            {dogs}
+            {cat}
         </div>
     )
 }

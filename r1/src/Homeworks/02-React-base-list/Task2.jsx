@@ -1,11 +1,12 @@
-function Task2({props}) {
-
-    const list = () => props.map((a) => a);
+function Task2({dogs, index}) {
 
     return (
-        <div className="hw-circle">
-            {list}
-        </div>
+            <div className="hw-circle">
+                {dogs}
+                <span className="circle-index">
+                    {index}
+                </span>
+            </div>
     )
 }
 
