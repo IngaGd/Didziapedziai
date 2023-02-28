@@ -1,41 +1,35 @@
-import { useState } from "react";
+import { useState } from 'react';
 import mutateColor from '../../Functions/mutateColor'
 
 const dicesCb = [
-    {v: 1, t: 'One'},
-    {v: 2, t: 'Two'},
-    {v: 3, t: 'Three'},
-    {v: 4, t: 'Four'},
-    {v: 5, t: 'Five'},
-    {v: 6, t: 'Six'}                
-]
+    { v: 1, t: 'One' },
+    { v: 2, t: 'Two' },
+    { v: 3, t: 'Three' },
+    { v: 4, t: 'Four' },
+    { v: 5, t: 'Five' },
+    { v: 6, t: 'Six' }
+];
 
+function Edit({ setEditData, setEditModal, editModal}) {
 
-function Create({setCreateData}) {
+    const [number, setNumber] = useState(editModal.number);
+    const [size, setSize] = useState(editModal.size);
+    const [color, setColor] = useState(editModal.color);
 
-    const [number, setNumber] = useState(1);
-    const [size, setSize] = useState(100);  
-    const [color, setColor] = useState('#ffffff');  
-    
-    //funkcijos apiforminimas, kuri atliks perdavima state'u i setCreateData
-    const create = _ => {
-        setCreateData( //kadangi is number, size, color ateina stringai, reikia perdaryti juos i reikiamas reiksmes
+    const edit = _ => {
+        setEditData(
             {
-                number: parseInt(number), 
-                size: parseInt(size), 
-                color}); 
-            //kai pacreatinam, sugrazinam i pradines reiksmes
-            setNumber(1);
-            setSize(100);
-            setColor('#ffffff');
+                number: parseInt(number),
+                size: parseInt(size),
+                color,
+                id: editModal.id
+            });
+        setEditModal(null);
     }
 
-return (
+    return (
         <>
-            <div className="title">
-                Create
-            </div>
-            <div className="dice-edit-create create">
+            <div className="dice-edit-create edit">
 
                 <div className="top">
                     <div className="rotate">
@@ -54,8 +48,8 @@ return (
                     <div className="cb-bin">
                         {
                             dicesCb.map(c => <span key={c.v}>
-                                <input type="checkbox" id={'r_' + c.v} checked={number === c.v} onChange={() => setNumber(c.v)} />
-                                <label className="cb" htmlFor={'r_' + c.v}>{c.t}</label>
+                                <input type="checkbox" id={'e_' + c.v} checked={number === c.v} onChange={() => setNumber(c.v)} />
+                                <label className="cb" htmlFor={'e_' + c.v}>{c.t}</label>
                             </span>)
                         }
                     </div>
@@ -65,14 +59,12 @@ return (
                     <div className="input-bin color">
                         <input type="color" value={color} onChange={e => setColor(e.target.value)} style={{ color: mutateColor(color) }} />
                     </div>
-                    {/* create uskabinam ant sio mygtuko */}
-                    <button className="blue" onClick={create}>add</button>
+                    <button className="blue" onClick={edit}>save</button>
+                    <button className="red" onClick={() => setEditModal(null)}>cancel</button>
                 </div>
             </div>
         </>
     )
 }
 
-export default Create;
-
-
+export default Edit;

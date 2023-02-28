@@ -1,6 +1,7 @@
 import Delete from "./Delete";
+import Edit from "./Edit";
 
-function List({list, setDeleteModal, deleteModal, setDeleteData}) {
+function List({list, setDeleteModal, deleteModal, setDeleteData, setEditModal, editModal, setEditData}) {
 
     if (null === list) { //jei useState(null), vadinasi dar negavom is serverio jokiu duomenu
         return (
@@ -13,22 +14,30 @@ function List({list, setDeleteModal, deleteModal, setDeleteData}) {
     }
 
     return (
-        <div className="list">
-
-            {
-                list.map(d => <div key={d.id} className="item">
-                    <div className={'dice _' + d.number} style={{
+        <>
+            <div className="title">
+                List
+            </div>
+            <div className="list">
+                {
+                    list.map(d => <div key={d.id} className="item">
+                        <div className={'dice _' + d.number} style={{
                             fontSize: d.size + 'px',
                             color: d.color
-                    }}></div>
-                    <div className="delete-button" onClick={() => setDeleteModal(d)}></div>
-                    {
-                        deleteModal && deleteModal.id === d.id ? <Delete dice={d} setDeleteModal={setDeleteModal} setDeleteData={setDeleteData}/> : null
-                    }
-                </div>)
-            }
-
-        </div>
+                        }}></div>
+                        <div className="delete-button" onClick={() => setDeleteModal(d)}></div>
+                        <div className="edit-button" onClick={() => setEditModal(d)}></div>
+                        {
+                            deleteModal && deleteModal.id === d.id ? <Delete dice={d} setDeleteModal={setDeleteModal} setDeleteData={setDeleteData} /> : null
+                        }
+                        {
+                            editModal && editModal.id === d.id ? <Edit setEditModal={setEditModal} editModal={editModal} setEditData={setEditData} /> : null
+                        }                     
+                        
+                    </div>)
+                }
+            </div>
+        </>
     );
 }
 
