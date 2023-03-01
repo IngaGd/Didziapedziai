@@ -1,51 +1,45 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
-import './App.scss';
-import Fox from './Components/016/Fox';
-import Home from './Components/016/Home';
-import Menu from './Components/016/Menu';
-import Racoon from './Components/016/Racoon';
-import axios from 'axios';
+import AddButton from './Components/U1/AddButton';
+import DeleteButton from './Components/U1/DeleteButton';
+import RemoveButton from './Components/U1/RemoveButton';
+import './Components/U1/style.scss';
+import UsersList from './Components/U1/UsersList';
+
+
+const users = [
+    {id: 1, name: 'Leanne', surname: 'Graham', account: 120},
+    {id: 2, name: 'Ervin', surname: 'Howell', account: 323},
+    {id: 3, name: 'Clementine', surname: 'Bauch', account: 0},
+    {id: 4, name: 'Patricia', surname: 'Lebsack', account: 4507},         
+];
+
 
 
 function App() {
 
-    const [page, setPage] = useState('home');
+    const [userColor, setColor] = useState('black');
 
-    //surisam su serveriu:
-    const [content, setContent] = useState(null);
-
-    //kol negavom kontento, nerodom viso psl. AXIOS kreipiasi i serveri
-
-    useEffect(() => {
-
-        axios.get('http://localhost:3003/api/' + page) //kreipiamasi i page
-        .then(res => {                                   // kai gauname ats, pasetinam kontenta kaip response
-            setContent(res.data);
-        });
-
-    }, [page])
 
 
     return (
         <div className="App">
             <header className="App-header">
-                <Menu setPage={setPage}/>
-                {
-                    page === 'home' && null !== content ? <Home title={content.title} /> : null
-                }
-                {
-                    page === 'racoon' && null !== content ? <Racoon title={content.title} /> : null
-                }
-                {
-                    page === 'fox' && null !== content ? <Fox title={content.title} /> : null
-                }
 
-                {/* jei contentas nulinis, rodom loading: */}
+                <ul className='list' style={{color: userColor}}>
+                    {/* visada turi buti unikalus key */}
+                    {
+                        users.map((a, i) => <UsersList key={a.id} users={a} index={i}/>)
+                    }
+                </ul>
 
-                {
-                    null === content ? <h1>LOADING</h1> : null
-                }
+                <ul>
+
+                </ul>
+
+
+                <DeleteButton setColor={setColor}/>
+                <AddButton />
+                <RemoveButton />
 
             </header>
         </div>
