@@ -1,6 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3003;
+
+app.use(cors());
 
 
 // SSR - server side rendering
@@ -34,17 +37,18 @@ app.get('/fox', (req, res) => {
 // API
 
 app.get('/api/home', (req, res) => {
-    res.json({ title: `Hello Forest!` })
+    res.json({ title: `Hello Forest!`, color: `pink` })
 });
 
 app.get('/racoon', (req, res) => {
-    res.json({ title: `Hello RACOON!` })
+    res.json({ title: `Hello RACOON!`, color: `skyblue` })
 });
 
 app.get('/fox', (req, res) => {
-    res.json({ title: `Hello FOX!` })
+    res.json({ title: `Hello FOX!`, color: `yellow` })
 });
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+
