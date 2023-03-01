@@ -86,7 +86,11 @@ do {
     randomSet1.add(genDigit);
 } while (randomSet1.size < 100);
 
-console.log([...randomSet1]);
+const arrRandomSet1 = [[...randomSet1]];
+
+console.log('arrRandomSet1', arrRandomSet1);
+
+//-------
 
 const randomSet2 = new Set();
 
@@ -95,7 +99,12 @@ do {
     randomSet2.add(genDigit);
 } while (randomSet2.size < 100);
 
-console.log([...randomSet2]);
+const arrRandomSet2 = [[...randomSet2]];
+
+console.log('arrRandomSet2', arrRandomSet2);
 
 //6. Sugeneruokite masyvą, kuris būtų sudarytas iš reikšmių, 
 //kurios yra pirmame 5 uždavinio masyve, bet nėra antrame 5 uždavinio masyve.
+
+const arrFiltered = [...arrRandomSet1].filter(num => !randomSet2.has(num));
+console.log(arrFiltered);
