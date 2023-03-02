@@ -1,7 +1,7 @@
 function DeleteButton({setColor}) {
 
     const changeColor = () => {
-        setColor('blue');
+        setColor(c => c === 'black' ? 'blue' : 'black');
     }
 
     return (

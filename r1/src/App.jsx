@@ -1,91 +1,46 @@
-import { useEffect, useState } from 'react';
-import Create from './Components/Dices-Server/Create';
-import List from './Components/Dices-Server/List';
-import './Components/Dices-Server/style.scss';
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
+import AddButton from './Components/U1/AddButton';
+import DeleteButton from './Components/U1/DeleteButton';
+import RemoveButton from './Components/U1/RemoveButton';
+import './Components/U1/style.scss';
+import UsersList from './Components/U1/UsersList';
 
-const URL = 'http://localhost:3003/dices';
+
+const users = [
+    {id: 1, name: 'Leanne', surname: 'Graham', account: 120},
+    {id: 2, name: 'Ervin', surname: 'Howell', account: 323},
+    {id: 3, name: 'Clementine', surname: 'Bauch', account: 0},
+    {id: 4, name: 'Patricia', surname: 'Lebsack', account: 4507},         
+];
+
+
 
 function App() {
 
-    const [lastUpdate, setLastUpdate] = useState(Date.now());
-    const [list, setList] = useState(null);
-    const [createData, setCreateData] = useState(null);
-    const [deleteModal, setDeleteModal] = useState(null);
-    const [deleteData, setDeleteData] = useState(null);
-    const [editModal, setEditModal] = useState(null);
-    const [editData, setEditData] = useState(null);
-    const [messages, setMessages] = useState(null);
+    const [userColor, setColor] = useState('black');
 
-
-    useEffect(() => {
-        axios.get(URL)
-            .then(res => {
-                setList(res.data);
-            });
-    }, [lastUpdate]);
-
-
-
-    useEffect(() => {
-        if (null === createData) {
-            return;
-        }
-        // pazadas
-        const promiseId = uuidv4();
-        setList(d => [...d, { ...createData, promiseId }]);
-
-        // serveris
-        axios.post(URL, { ...createData, promiseId })
-            .then(res => {
-                setList(d => d.map(d => res.data.promiseId === d.promiseId ? { ...d, id: res.data.id, promiseId: null } : { ...d }));
-                console.log(res.data);
-            });
-
-    }, [createData]);
-
-
-    useEffect(() => {
-        if (null === deleteData) {
-            return;
-        }
-        axios.delete(URL + '/' + deleteData.id)
-            .then(res => {
-                console.log(res.data);
-                setLastUpdate(Date.now());
-            });
-
-    }, [deleteData]);
 
 
 
     return (
-        <>
-            <div className="dices">
-                <div className="content">
-                    <div className="left">
-                        <Create setCreateData={setCreateData} />
-                    </div>
-                    <div className="right">
-                        <List
-                            list={list}
-                            setDeleteModal={setDeleteModal}
-                            deleteModal={deleteModal}
-                            setDeleteData={setDeleteData}
-                            editModal={editModal}
-                            setEditModal={setEditModal}
-                            setEditData={setEditData}
-                        />
-                    </div>
-                </div>
-            </div>
-            {
-                // messages && <Messages messages={messages} />
-            }
-        </>
+        <div className="App">
+            <header className="App-header">
+
+                <ul className='list' style={{color: userColor}}>
+                    {/* visada turi buti unikalus key */}
+                    {
+                        users.map((a, i) => <UsersList key={a.id} users={a} index={i}/>)
+                    }
+                </ul>
+
+                <DeleteButton setColor={setColor}/>
+                <AddButton />
+                <RemoveButton />
+
+            </header>
+        </div>
     );
 
 }
 
-export default App;
+export default App; 

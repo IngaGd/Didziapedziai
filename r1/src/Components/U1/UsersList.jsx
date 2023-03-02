@@ -4,7 +4,7 @@ function UsersList({users, index, userColor}) {
         <li style={{
             // color: users.account !== 0 ? 'green' : 'grey',
             // backgroundColor: index % 2 ? 'pink' : 'yellow',
-        }} key={users.id} className='user'>{users.id} {users.name} {users.surname}</li>
+        }} key={users.id} className='user'>{users.name} {users.surname}{index}</li>
     )
 }
 

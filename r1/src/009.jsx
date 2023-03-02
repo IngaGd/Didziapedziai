@@ -34,6 +34,7 @@ function App() {
 
     const addSq = () => {
         //setSq(sq.push(1)) // labai blogas variantas, nes keiciame sq
+        //setSq(s => [...s, 1]); //prideda dar po viena kvadratuka
         setSq(s => [...s, {id: uuidv4(), color: randColor()}]) //nukopijuojam sena ir pridedam nauja el
         //pagal unikalu identifikatoriu
     }
@@ -44,7 +45,7 @@ function App() {
     }
 
     const cloneSq = id => {
-        const clone = sq.find(s => s.id === id);
+        const clone = sq.find(s => s.id === id);//susirandam squerus, findinam, ka norim klonuoti
         
         setSq(s => [...s, {...clone, id: uuidv4()}]) //pridedam clona, kuriame overridiname id
     }
@@ -53,7 +54,8 @@ function App() {
         setSq([]);//kadangi needitinam, tai idedame be callback, clearinant idedam tuscia masyva
     }
 
-    //grazinam nauja objekta, paimam pries tai buvusias obj savybes
+    //grazinam nauja objekta, paimam pries tai buvusias obj savybes. kadangi nieko nepridedam ir nneatimam, o visus
+    //keiciam, naudojam map
     const changeColors = () => {
         setSq(s => s.map(s => ({...s, color: randColor()} ))); 
     }
@@ -78,7 +80,7 @@ function App() {
 
             {
                 sq.map((s, i) => 
-                <div key={i} className="sq  spin" style={{
+                <div key={i} className="sq spin" style={{
                     backgroundColor: s.color +'70',
                     borderColor: s.color
                 }}> 
