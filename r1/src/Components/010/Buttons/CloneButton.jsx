@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 function CloneButton({classes, sq, setSq}) {
 
     const clickHandler = () => {
+        //ieskot kvadratuko nebereikia, jau esam surade
         setSq(s => [...s, {...sq, id: uuidv4()}]);
     }
 

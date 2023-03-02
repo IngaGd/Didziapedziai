@@ -4,6 +4,8 @@ import rand from '../../../Functions/rand';
 
 function AddButton({classes, setSq}) {
 
+    //css klase perduodama propsu i del butona is App 'blue'
+
     const clickHandler = () => {
         setSq(s => [...s, {
             id: uuidv4(), 

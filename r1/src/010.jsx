@@ -13,21 +13,26 @@ import DefaultSortButton from './Components/010/Buttons/DefaultSortButton';
 import Filter500Button from './Components/010/Buttons/Filter500Button';
 import ShowAllButton from './Components/010/Buttons/ShowAllButton';
 
-
+//vizualizacija ir biznio logika viename
 
 function App() {
 
-    const [sq, setSq] = useState([]); //upliftintas state'as
+    const [sq, setSq] = useState([]); 
 
     return (
         <div className="App">
             <header className="App-header">
+
+                {/* binas, generuojantis kvadratukus. state sq mapinamas i nauja squera*/}
 
                 <div className="sq-bin">
                     {
                         sq.map((s, i) => s.show ? <Sq key={i} s={s} i={i} setSq={setSq} /> : null)
                     }
                 </div>
+
+                {/* binas, generuojantis mygtukus: */}
+
                 <div className="sq-bin">
                     <AddButton setSq={setSq} classes='blue'/>
                     <ClearButton setSq={setSq} classes="red"/>
