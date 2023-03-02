@@ -40,7 +40,7 @@ app.post('/dices', (req, res) => {
     fs.writeFileSync('./data.json', allData, 'utf8');
 
     res.json({
-        message: 'OK',
+        message: { text: 'new dice is ready to roll', 'type': 'ok' },
         promiseId,
         id
     });
@@ -54,11 +54,27 @@ app.delete('/dices/:id', (req, res) => {
     deletedData = JSON.stringify(deletedData);
     fs.writeFileSync('./data.json', deletedData, 'utf8');
 
-    res.json({ message: 'OK' });
+    res.json({ message: { text: 'the dice was deleted', 'type': 'error' } });
 });
 
 
+app.put('/dices/:id', (req, res) => {//redagavimui naudojam put
+    let allData = fs.readFileSync('./data.json', 'utf8');
+    allData = JSON.parse(allData);
 
+    const data = {  //duomenys, kuriuos gaunam is body
+        number: req.body.number,
+        size: req.body.size,
+        color: req.body.color,
+    };
+
+    let editedData = allData.map(d => req.params.id === d.id ? { ...d, ...data } : { ...d });
+    //tam, ka norim editint, duodam naujus duomenis, imam tai, kas buvo ...d ir overridinam su naujais duomenimis ...data
+    editedData = JSON.stringify(editedData);
+    fs.writeFileSync('./data.json', editedData, 'utf8');
+
+    res.json({ message: { text: 'New dice is was edited', 'type': '' } });
+});
 
 
 

@@ -1,46 +1,54 @@
 import { useState } from 'react';
-import AddButton from './Components/U1/AddButton';
-import DeleteButton from './Components/U1/DeleteButton';
-import RemoveButton from './Components/U1/RemoveButton';
-import './Components/U1/style.scss';
-import UsersList from './Components/U1/UsersList';
+import './App.scss';
+import BoxLarge from './Components/018/BoxLarge';
+import GlobalUserContext from './Components/018/GlobalUserContext';
+import GlobalSqContext from './Components/018/GlobalSqContext';
+import rand from './Functions/rand';
 
-
-const users = [
-    {id: 1, name: 'Leanne', surname: 'Graham', account: 120},
-    {id: 2, name: 'Ervin', surname: 'Howell', account: 323},
-    {id: 3, name: 'Clementine', surname: 'Bauch', account: 0},
-    {id: 4, name: 'Patricia', surname: 'Lebsack', account: 4507},         
-];
-
-
+const users = ['Bebras', 'Zebras', 'Ūdra'];
 
 function App() {
 
-    const [userColor, setColor] = useState('black');
+    const [sq1, setSq1] = useState([]);
+    const [sq2, setSq2] = useState([]);
 
+    const [user, setUser] = useState(users[rand(0, 2)]);
 
+    const addSq1 = _ => {
+        setSq1(s => [ ...s, rand(100, 999)]);
+    }
 
+    const addSq2 = _ => {
+        setSq2(s => [...s, rand(100, 999)]);
+    }
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <GlobalUserContext.Provider value={{user}}>
+        <GlobalSqContext.Provider value={
+            {
+                sq1: sq1,
+                sq2,
+            }
+}>
+            <div className="App">
+                <header className="App-header">
+                    <h1>conte-X-t</h1>
 
-                <ul className='list' style={{color: userColor}}>
-                    {/* visada turi buti unikalus key */}
-                    {
-                        users.map((a, i) => <UsersList key={a.id} users={a} index={i}/>)
-                    }
-                </ul>
 
-                <DeleteButton setColor={setColor}/>
-                <AddButton />
-                <RemoveButton />
+                    {/* <BoxLarge sq1={sq1} /> */}
 
-            </header>
-        </div>
+                    <BoxLarge />
+                    {/* <button className="coral" onClick={addSq1}>add</button>
+                    <button className="blue" onClick={addSq2}>add</button> */}
+                    <button className="coral" onClick={addSq1}>add</button>
+                    <button className="blue" onClick={addSq2}>add</button>
+                    <button className="red" onClick={() => setUser(users[rand(0, 2)])}>user</button>
+                </header>
+            </div>
+        </GlobalSqContext.Provider>
+        </GlobalUserContext.Provider>
     );
 
 }
 
-export default App; 
+export default App;
