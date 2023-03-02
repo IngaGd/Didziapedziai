@@ -13,7 +13,7 @@ function Fenix() {
             }
         },
 
-        [] // tuscias masybas reikalingas sekti life cicle
+        [] // tuscias masyvas reikalingas sekti life cicle
     )
 
     return (

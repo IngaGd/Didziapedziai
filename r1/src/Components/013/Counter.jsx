@@ -13,11 +13,11 @@ function Counter() {
 
     console.log('Counter function');
 
-    const a = useRef(1); //useRef gali buti naudojamas kaip paprastas kintamasis, jo perkrovimas neissaukia komponento
-    //perkrovimo
+    const a = useRef(1); //useRef gali buti naudojamas kaip paprastas kintamasis, jo poklytis neissaukia komponento
+    //perkrovimo (gali pabuti paprastu kintamuoju, pvz vietoj let a = 1)
     const start = useRef(false);
 
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const [stars, setStars] = useState(''); // kiek yra count, tiek nupiesiama zvaigzduciu
 
     // const fun = _ => {
@@ -29,6 +29,10 @@ function Counter() {
     //     fun();
     // }, []);
 
+    //si useEfect uzprogramuotas stebejimui count, kai count pasikeicia, pasileidzia nurodoma funkcija
+    //pasileidzia ir tada, kai prasideda komponento lifecicle, nebent nurodome, kad nereikia paleisti is karto
+    //su start.current salygom
+
     useEffect(() => {
         if (start.current) {
             console.log('count change');
@@ -36,11 +40,12 @@ function Counter() {
             start.current = true;
         }  
 
-    }, [count]); //masyvas, kuriame yra priklausomybes/dependensiai
+    }, [count]); //masyvas, kuriame yra priklausomybes/dependensiai, dependensiuose turi buti irasyti visi state,
+    //kurie yra panaudoti sioje funkcijoje
 
     useEffect(() => {
-        setStars(''.padStart(count, '*'));
-    }, [count]);
+        setStars(''.padStart(count, '*'));//cia pravercia, kad count prasisuka ir pirma karta uzsikrovus komponentui
+    }, [count]); //jei neirasom visu, isbalansuojam rekto asinchronini veikima, taciau reikia ziureti, kad neuzsiciklintu
 
     const add = _ => {
         setCount(c => c + 1);
@@ -53,7 +58,8 @@ function Counter() {
     }
     
     const addToVar = _ => {
-        console.log(++a.current); // visada prideti current savybe
+        console.log(++a.current); // visada prideti current savybe, nes konctantos keisti negalime, su
+        //kurent galime deti bet ka, kad ir objekta ir ji keisti. 
     }
 
 

@@ -11,8 +11,9 @@ function Timer() {
     //setInterval(() => setSeconds(s => s + 1), 1000);
 
     useEffect(() => {
-        const timerId = setInterval(() => setSeconds(s => s + 1), 1000);
-        return clearInterval(timerId);
+        const timerId = setInterval(() => setSeconds(s => s + 1), 1000); //setInterval - js funkcija, kuri paleidineja
+        //funkcija per laika
+        return () => clearInterval(timerId);//issivaloma
     }, []);
 
     return (
