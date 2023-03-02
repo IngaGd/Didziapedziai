@@ -9,6 +9,8 @@ import { withAdd, withClear, withColor } from './Components/011/HOCs/sq';
 // import Circle from './Components/011/Circle';
 // import Number from './Components/011/Number';
 
+//biznio logika atskirta nuo vizualo
+
 function App() {
 
     const [sq, setSq] = useState([]);

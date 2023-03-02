@@ -7,8 +7,8 @@ function Counter() {
     //komponentas kaip funkcija gali buti iskvieciama daugybe kartu
 
     //life-cicle:
-    //1. kompinento gimimas, kai pirm1 karta idedamas i DOM
-    //2. kompinentas mirsta, kai komponenta isnaikinam (pvz istrintas kvadratukas), sinykimas is DOM'o, t.y. 
+    //1. komponento gimimas, kai pirma karta idedamas i DOM
+    //2. komponentas mirsta, kai komponenta isnaikinam (pvz istrintas kvadratukas), sinykimas is DOM'o, t.y. 
     // vaizdo
 
     console.log('Counter function');

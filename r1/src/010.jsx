@@ -13,7 +13,7 @@ import DefaultSortButton from './Components/010/Buttons/DefaultSortButton';
 import Filter500Button from './Components/010/Buttons/Filter500Button';
 import ShowAllButton from './Components/010/Buttons/ShowAllButton';
 
-//vizualizacija ir biznio logika viename
+//usereducer - vizualizacija ir biznio logika viename
 
 function App() {
 
