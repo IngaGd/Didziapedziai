@@ -11,9 +11,9 @@
     display: flex;
     font-size: 16px;
     justify-content: center;
-    padding: 1rem 1.75rem;
+    padding: 10px 15px;
     text-decoration: none;
-    width: 120px;
+    width: 200px;
     border: 0;
     cursor: pointer;
     user-select: none;
@@ -209,4 +209,42 @@ btn_2 {
     .button-37 {
         padding: 10px 30px;
     }
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    label {
+        color: darkgreen;
+    }
+    input {
+        margin-top: 5px;
+        padding: 5px;
+        width: 200px;
+        background-color: wheat;
+        border: 1px solid pink;
+        border-radius: 5px;
+    }
+    .btn {
+        margin-top: 10px;
+        display: inline-block;
+    }
+}
+
+.clients {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.select {
+    width: 100px;
+}
+
+.load {
+    font-size: 50px;
+    color: black;
 }

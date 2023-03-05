@@ -53,7 +53,7 @@ function App() {
     }
 
     const paymentControll = v => {
-        setPayment(v);//neperikia pervaziuoti visus, pasiliekam tik ta, kuris pazymetas
+        setPayment(v);//neberikia pervaziuoti visus, pasiliekam tik ta, kuris pazymetas
     }
 
     return (

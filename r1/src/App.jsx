@@ -1,54 +1,46 @@
-import { useState } from 'react';
-import './App.scss';
-import BoxLarge from './Components/018/BoxLarge';
-import GlobalUserContext from './Components/018/GlobalUserContext';
-import GlobalSqContext from './Components/018/GlobalSqContext';
-import rand from './Functions/rand';
+import { useState, useEffect } from 'react';
+import { create, readData } from './Components/U1/localStorage';
+import './Components/U1/style.scss';
 
-const users = ['Bebras', 'Zebras', 'Ūdra'];
+import CreateAccount from './Components/U1/CreateAccount';
+import ClientsList from './Components/U1/ClientsList';
+
+
+const KEY = 'Account';
 
 function App() {
 
-    const [sq1, setSq1] = useState([]);
-    const [sq2, setSq2] = useState([]);
+    const [list, setList] = useState(null);
+    const [createAccount, setCreateAccount] = useState(null);
+    const [showUpdate, setShowUpdate] = useState(Date.now());
 
-    const [user, setUser] = useState(users[rand(0, 2)]);
+    useEffect(() => {
 
-    const addSq1 = _ => {
-        setSq1(s => [ ...s, rand(100, 999)]);
-    }
+        setTimeout(() => setList(readData(KEY)), 2000);
 
-    const addSq2 = _ => {
-        setSq2(s => [...s, rand(100, 999)]);
-    }
+        //setList(readData(KEY));
+    }, [showUpdate]);
+
+    //stebim, kaip pasikeite create account:
+    useEffect(() => {
+        if (null === createAccount) {
+            return;
+        }
+        create(KEY, createAccount);
+        setShowUpdate(Date.now());
+    }, [createAccount])
 
     return (
-        <GlobalUserContext.Provider value={{user}}>
-        <GlobalSqContext.Provider value={
-            {
-                sq1: sq1,
-                sq2,
-            }
-}>
-            <div className="App">
-                <header className="App-header">
-                    <h1>conte-X-t</h1>
+        <div className="App">
+            <header className="App-header">
 
+                <CreateAccount setCreateAccount={setCreateAccount}/>
+                <ClientsList list={list} />
 
-                    {/* <BoxLarge sq1={sq1} /> */}
-
-                    <BoxLarge />
-                    {/* <button className="coral" onClick={addSq1}>add</button>
-                    <button className="blue" onClick={addSq2}>add</button> */}
-                    <button className="coral" onClick={addSq1}>add</button>
-                    <button className="blue" onClick={addSq2}>add</button>
-                    <button className="red" onClick={() => setUser(users[rand(0, 2)])}>user</button>
-                </header>
-            </div>
-        </GlobalSqContext.Provider>
-        </GlobalUserContext.Provider>
+            </header>
+        </div>
     );
 
 }
 
-export default App;
+export default App; 

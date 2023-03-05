@@ -8,7 +8,7 @@ import './Components/Dices/style.scss';
 import {v4 as uuidv4} from 'uuid';
 
 
-const KEY = 'FancyDices'; //konstanya, setingsas
+const KEY = 'FancyDices'; //konstanta, setingsas
 
 function App() {
 
