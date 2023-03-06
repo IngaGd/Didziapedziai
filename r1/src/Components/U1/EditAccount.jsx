@@ -12,7 +12,7 @@ const cardType = [
     {text: 'Visa', value: 'v'},    
 ]
 
-function EditAccount({setCreateAccount, setEditModal, editModal}) {
+function EditAccount({setEditAccount, setEditModal, editModal}) {
 
     const [clientInfo, setClientInfo] = useState([]);
 
@@ -21,19 +21,19 @@ function EditAccount({setCreateAccount, setEditModal, editModal}) {
     const [clientSurname, setClientSurname] = useState(editModal.surname);
     const [accountType, setAccountType] = useState(editModal.accountType);
     const [card, setCard] = useState(editModal.card);
-    const [balance, setBalance] = useState(0);
+    const [balance, setBalance] = useState(editModal.balance);
 
-    const createAccount = _ => {
-        setCreateAccount({
+    const edit = _ => {
+        setEditAccount(
+            {
             name: clientName, 
             surname: clientSurname,
             accountType: accountType,
             card: card,
             balance: parseInt(balance)
-        });
-        setClientName('');
-        setClientSurname('');
-        setAccountType('');
+        }
+        );
+        setEditModal(null);
     }
 
     const inputControl1 = e => {
@@ -91,9 +91,9 @@ function EditAccount({setCreateAccount, setEditModal, editModal}) {
             <div className='cb-bin'>
                 {
                     cardType.map(c => <span key={c.value}>
-                    <input type="checkbox" id={'r_' + c.value} checked={card === c.value}
+                    <input type="checkbox" id={'e_' + c.value} checked={card === c.value}
                     onChange={() => cardTypeSelecting(c.value)}/>
-                    <label className='cb' htmlFor={'r_' + c.value}>{c.text}</label> 
+                    <label className='cb' htmlFor={'e_' + c.value}>{c.text}</label> 
                     </span>)
                 }
             </div>
@@ -103,7 +103,7 @@ function EditAccount({setCreateAccount, setEditModal, editModal}) {
 
 
             {/* <button className="btn" onClick={showClientInfo}>Show client data</button>   */}
-            <button className="btn" onClick={createAccount}>Save data</button>
+            <button className="btn" onClick={edit}>Save data</button>
             <button className="btn" onClick={() => setEditModal(null)}>Cancel</button>              
         </div>
 

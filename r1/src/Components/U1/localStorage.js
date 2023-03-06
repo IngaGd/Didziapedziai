@@ -24,3 +24,9 @@ export const erase = (key, id) => {
     const deleteAccount = allData.filter(a => id !== a.id);
     saveData(key, deleteAccount);
 }
+
+export const edit = (key, data, id) => {
+    const allData = readData(key);
+    const editAccount = allData.map(a => id === a.id ? { ...a, ...data, id } : { ...a });
+    saveData(key, editAccount);
+}

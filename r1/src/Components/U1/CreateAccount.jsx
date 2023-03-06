@@ -23,7 +23,7 @@ function CreateAccount({setCreateAccount}) {
     const [card, setCard] = useState(null);
     const [balance, setBalance] = useState(0);
 
-    const createAccount = _ => {
+    const create = _ => {
         setCreateAccount({
             name: clientName, 
             surname: clientSurname,
@@ -103,7 +103,7 @@ function CreateAccount({setCreateAccount}) {
 
 
             {/* <button className="btn" onClick={showClientInfo}>Show client data</button>   */}
-            <button className="btn" onClick={createAccount}>Set client data</button>          
+            <button className="btn" onClick={create}>Set client data</button>          
         </div>
 
         </>

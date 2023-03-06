@@ -1,98 +1,76 @@
-import { useEffect, useState } from 'react';
-import Create from './Components/Dices2/Create';
-import List from './Components/Dices2/List';
-import './Components/Dices2/style.scss';
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+import { useState, useEffect } from 'react';
+import { create, readData, erase, edit} from './Components/U1/localStorage';
+import './Components/U1/style.scss';
 
-import Messages from './Components/Dices2/Messages';
-import { GlobalContextProvider } from './Components/Dices2/GlobalContext';
+import CreateAccount from './Components/U1/CreateAccount';
+import ClientsList from './Components/U1/ClientsList';
 
-const URL = 'http://localhost:3003/dices';
 
+const KEY = 'Account';
 
 function App() {
 
-    const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [list, setList] = useState(null);
-    const [createData, setCreateData] = useState(null);
+    const [createAccount, setCreateAccount] = useState(null);
+    const [showUpdate, setShowUpdate] = useState(Date.now());
     const [deleteModal, setDeleteModal] = useState(null);
-    
-    const [editModal, setEditModal] = useState(null);
-    const [editData, setEditData] = useState(null);
-
-  
+    const [deleteAccount, setDeleteAccount] = useState(null);
+    const [editModal, setEditModal] = useState(null);    
+    const [editAccount, setEditAccount] = useState(null);
 
     useEffect(() => {
-        axios.get(URL)
-            .then(res => {
-                setList(res.data);
-            });
-    }, [lastUpdate]);
 
+        //setTimeout(() => setList(readData(KEY)), 2000);
 
+        setList(readData(KEY));
+    }, [showUpdate]);
 
+    //stebim, kaip pasikeite create account:
     useEffect(() => {
-        if (null === createData) {
+        if (null === createAccount) {
             return;
         }
-        // pazadas
-        const promiseId = uuidv4();
-        setList(d => [...d, { ...createData, promiseId }]);
+        create(KEY, createAccount);
+        setShowUpdate(Date.now());
+    }, [createAccount])
 
-        // serveris
-        axios.post(URL, { ...createData, promiseId })
-            .then(res => {
-                setList(d => d.map(d => res.data.promiseId === d.promiseId ? { ...d, id: res.data.id, promiseId: null } : { ...d }));
-                // addMessage({text: res.data.message.text, type: res.data.message.type});
-            });
-
-    }, [createData]);
-
-
-
-
-
+    //stebim deleteData state pasikeitima ir deletinam su delete metodu
     useEffect(() => {
-        if (null === editData) {
+        if (null === deleteAccount) {
             return;
         }
-        axios.put(URL + '/' + editData.id, editData)
-            .then(res => {
-                console.log(res.data);
-                setLastUpdate(Date.now());
-                // addMessage({text: res.data.message.text, type: res.data.message.type});
-            });
+        erase(KEY, deleteAccount.id);
+        setShowUpdate(Date.now());
+    }, [deleteAccount])
 
-    }, [editData]);
-
-
+    useEffect(() => {
+        if (null === editAccount) {
+            return;
+        }
+        console.log(editAccount);
+        edit(KEY, editAccount, editAccount.id);
+        setShowUpdate(Date.now());
+    }, [editAccount])
 
     return (
-        <GlobalContextProvider>
-            <div className="dices">
-                <div className="content">
-                    <div className="left">
-                        <Create setCreateData={setCreateData} />
-                    </div>
-                    <div className="right">
-                        <List
-                            list={list}
-                            setDeleteModal={setDeleteModal}
-                            deleteModal={deleteModal}
-                            editModal={editModal}
-                            setEditModal={setEditModal}
-                            setEditData={setEditData}
-                        />
-                    </div>
-                </div>
-            </div>
-            {
-                <Messages/>
-            }
-        </GlobalContextProvider>
+        <div className="App">
+            <header className="App-header">
+
+                <CreateAccount setCreateAccount={setCreateAccount}/>
+                <ClientsList 
+                list={list}
+                setDeleteModal={setDeleteModal}
+                deleteModal={deleteModal}
+                setDeleteAccount={setDeleteAccount}
+                editModal={editModal}
+                setEditModal={setEditModal}
+                editAccount={editAccount}
+                setEditAccount={setEditAccount}
+                 />
+            </header>
+        </div>
     );
 
 }
 
-export default App;
+export default App; 
