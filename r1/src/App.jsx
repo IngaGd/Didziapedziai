@@ -1,43 +1,98 @@
-import { useState } from 'react';
-import './App.scss';
-import { useAdd23 } from './Components/019/useAdd23';
-import { useLocalStorage } from './Components/019/useLocalStorage';
-import { useSimpleState } from './Components/019/useSimpleState';
+import { useEffect, useState } from 'react';
+import Create from './Components/Dices2/Create';
+import List from './Components/Dices2/List';
+import './Components/Dices2/style.scss';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+
+import Messages from './Components/Dices2/Messages';
+import { GlobalContextProvider } from './Components/Dices2/GlobalContext';
+
+const URL = 'http://localhost:3003/dices';
 
 
 function App() {
 
-    const [count1, setCount1] = useState(1);
-    const [count2, setCount2] = useSimpleState(10);
-    const [count3, setCount3] = useLocalStorage(24, 'couter123');
-    const [count4, setCount4] = useAdd23(42);
+    const [lastUpdate, setLastUpdate] = useState(Date.now());
+    const [list, setList] = useState(null);
+    const [createData, setCreateData] = useState(null);
+    const [deleteModal, setDeleteModal] = useState(null);
+    
+    const [editModal, setEditModal] = useState(null);
+    const [editData, setEditData] = useState(null);
+
+  
+
+    useEffect(() => {
+        axios.get(URL)
+            .then(res => {
+                setList(res.data);
+            });
+    }, [lastUpdate]);
+
+
+
+    useEffect(() => {
+        if (null === createData) {
+            return;
+        }
+        // pazadas
+        const promiseId = uuidv4();
+        setList(d => [...d, { ...createData, promiseId }]);
+
+        // serveris
+        axios.post(URL, { ...createData, promiseId })
+            .then(res => {
+                setList(d => d.map(d => res.data.promiseId === d.promiseId ? { ...d, id: res.data.id, promiseId: null } : { ...d }));
+                // addMessage({text: res.data.message.text, type: res.data.message.type});
+            });
+
+    }, [createData]);
+
+
+
+
+
+    useEffect(() => {
+        if (null === editData) {
+            return;
+        }
+        axios.put(URL + '/' + editData.id, editData)
+            .then(res => {
+                console.log(res.data);
+                setLastUpdate(Date.now());
+                // addMessage({text: res.data.message.text, type: res.data.message.type});
+            });
+
+    }, [editData]);
+
 
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>
-                    <span style={{ color: 'crimson', padding: '10px' }}>{count1}</span>
-                    <span style={{ color: 'skyblue', padding: '10px' }}>{count2}</span>
-                    <span style={{ color: 'coral', padding: '10px' }}>{count3}</span>
-                    <span style={{ color: 'crimson', padding: '10px' }}>{count4}</span>
-                </h1>
-
-                <div className="sq-bin">
-                    <button className="red" onClick={() => setCount1(c => c + 1)}>+1</button>
-                    <button className="blue" onClick={() => setCount2(c => c + 11)}>+11</button>
-                    <button className="coral" onClick={() => setCount3(c => c - 7)}>-7</button>
-                    {/* pakeiciamas state i priesinga c => !c */}
-                    <button className="red" onClick={() => setCount4(c => !c)}>+23</button>
+        <GlobalContextProvider>
+            <div className="dices">
+                <div className="content">
+                    <div className="left">
+                        <Create setCreateData={setCreateData} />
+                    </div>
+                    <div className="right">
+                        <List
+                            list={list}
+                            setDeleteModal={setDeleteModal}
+                            deleteModal={deleteModal}
+                            editModal={editModal}
+                            setEditModal={setEditModal}
+                            setEditData={setEditData}
+                        />
+                    </div>
                 </div>
-            </header>
-        </div>
+            </div>
+            {
+                <Messages/>
+            }
+        </GlobalContextProvider>
     );
 
 }
 
 export default App;
-
-
-
-
