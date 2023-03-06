@@ -248,3 +248,36 @@ btn_2 {
     font-size: 50px;
     color: black;
 }
+
+.delete-btn {
+    &::after {
+        content: '\2718';
+        color: crimson;
+        font-size: 26px;
+        line-height: 1;
+        display: block;
+        cursor: pointer;
+        padding: 0 0 0 20px;
+    }
+}
+
+.delete-modal {
+    .delete {
+        font-size: 30px;
+        border: 2px solid black;
+        padding: 5px;
+        cursor: pointer;
+    }
+}
+
+.edit-btn {
+    &::after {
+            content: '\205D';
+            color: skyblue;
+            font-size: 26px;
+            line-height: 1;
+            display: block;
+            cursor: pointer;
+            padding: 0 0 0 20px;
+    }
+}

@@ -18,3 +18,9 @@ export const create = (key, data) => {
     allData.push(data);
     saveData(key, allData);
 }
+
+export const erase = (key, id) => {
+    const allData = readData(key);
+    const deleteAccount = allData.filter(a => id !== a.id);
+    saveData(key, deleteAccount);
+}

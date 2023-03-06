@@ -12,15 +12,15 @@ const cardType = [
     {text: 'Visa', value: 'v'},    
 ]
 
-function CreateAccount({setCreateAccount}) {
+function EditAccount({setCreateAccount, setEditModal, editModal}) {
 
     const [clientInfo, setClientInfo] = useState([]);
 
 
-    const [clientName, setClientName] = useState('');
-    const [clientSurname, setClientSurname] = useState('');
-    const [accountType, setAccountType] = useState('');
-    const [card, setCard] = useState(null);
+    const [clientName, setClientName] = useState(editModal.name);
+    const [clientSurname, setClientSurname] = useState(editModal.surname);
+    const [accountType, setAccountType] = useState(editModal.accountType);
+    const [card, setCard] = useState(editModal.card);
     const [balance, setBalance] = useState(0);
 
     const createAccount = _ => {
@@ -103,11 +103,12 @@ function CreateAccount({setCreateAccount}) {
 
 
             {/* <button className="btn" onClick={showClientInfo}>Show client data</button>   */}
-            <button className="btn" onClick={createAccount}>Set client data</button>          
+            <button className="btn" onClick={createAccount}>Save data</button>
+            <button className="btn" onClick={() => setEditModal(null)}>Cancel</button>              
         </div>
 
         </>
     )
 }
 
-export default CreateAccount;
+export default EditAccount;
