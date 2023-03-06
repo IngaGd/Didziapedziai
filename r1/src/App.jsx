@@ -1,65 +1,43 @@
-import { useState, useEffect } from 'react';
-import { create, readData, erase} from './Components/U1/localStorage';
-import './Components/U1/style.scss';
+import { useState } from 'react';
+import './App.scss';
+import { useAdd23 } from './Components/019/useAdd23';
+import { useLocalStorage } from './Components/019/useLocalStorage';
+import { useSimpleState } from './Components/019/useSimpleState';
 
-import CreateAccount from './Components/U1/CreateAccount';
-import ClientsList from './Components/U1/ClientsList';
-
-
-const KEY = 'Account';
 
 function App() {
 
-    const [list, setList] = useState(null);
-    const [createAccount, setCreateAccount] = useState(null);
-    const [showUpdate, setShowUpdate] = useState(Date.now());
-    const [deleteModal, setDeleteModal] = useState(null);
-    const [editModal, setEditModal] = useState(null);
-    const [deleteAccount, setDeleteAccount] = useState(null);
+    const [count1, setCount1] = useState(1);
+    const [count2, setCount2] = useSimpleState(10);
+    const [count3, setCount3] = useLocalStorage(24, 'couter123');
+    const [count4, setCount4] = useAdd23(42);
 
-
-    useEffect(() => {
-
-        //setTimeout(() => setList(readData(KEY)), 2000);
-
-        setList(readData(KEY));
-    }, [showUpdate]);
-
-    //stebim, kaip pasikeite create account:
-    useEffect(() => {
-        if (null === createAccount) {
-            return;
-        }
-        create(KEY, createAccount);
-        setShowUpdate(Date.now());
-    }, [createAccount])
-
-    //stebim deleteData state pasikeitima ir deletinam su delete metodu
-    useEffect(() => {
-        if (null === deleteAccount) {
-            return;
-        }
-        erase(KEY, deleteAccount.id);
-        setShowUpdate(Date.now());
-    }, [deleteAccount])
 
     return (
         <div className="App">
             <header className="App-header">
+                <h1>
+                    <span style={{ color: 'crimson', padding: '10px' }}>{count1}</span>
+                    <span style={{ color: 'skyblue', padding: '10px' }}>{count2}</span>
+                    <span style={{ color: 'coral', padding: '10px' }}>{count3}</span>
+                    <span style={{ color: 'crimson', padding: '10px' }}>{count4}</span>
+                </h1>
 
-                <CreateAccount setCreateAccount={setCreateAccount}/>
-                <ClientsList 
-                list={list}
-                setDeleteModal={setDeleteModal}
-                deleteModal={deleteModal}
-                setDeleteAccount={setDeleteAccount}
-                editModal={editModal}
-                setEditModal={setEditModal}
-                 />
+                <div className="sq-bin">
+                    <button className="red" onClick={() => setCount1(c => c + 1)}>+1</button>
+                    <button className="blue" onClick={() => setCount2(c => c + 11)}>+11</button>
+                    <button className="coral" onClick={() => setCount3(c => c - 7)}>-7</button>
+                    {/* pakeiciamas state i priesinga c => !c */}
+                    <button className="red" onClick={() => setCount4(c => !c)}>+23</button>
+                </div>
             </header>
         </div>
     );
 
 }
 
-export default App; 
+export default App;
+
+
+
+
