@@ -19,7 +19,8 @@ export const create = (key, data) => {
     const allData = read(key); //nuskaitom is localstorage
     data.id = uuidv4();//papildom atsiustus duomenis unikaliu identifikatorium id
     allData.push(data); // i nuskaitytus duomenis pridedam atsiusta
-    write(key, allData); // ir vel viska irasome i localStorage
+    const sortedData = allData.sort((a, b) => (a.surname > b.surname) ? 1 : -1);
+    write(key, sortedData); // ir vel viska irasome i localStorage
 }
 
 export const destroy = (key, id) => {

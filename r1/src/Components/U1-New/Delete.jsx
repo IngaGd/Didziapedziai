@@ -1,9 +1,9 @@
-function Delete({setDeleteModal, setDeleteData, dice}) {
+function Delete({setDeleteModal, setDeleteData, account}) {
 
     return (
         <div className="delete-modal">
             Confirm delete
-            <span onClick={() => setDeleteData(dice)}>X</span>
+            <span onClick={() => setDeleteData(account)}>X</span>
             <span onClick={() => setDeleteModal(null)}>Cancel</span>            
         </div>
     )

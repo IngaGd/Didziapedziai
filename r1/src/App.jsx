@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Create from './Components/U1-New/Create';
+import Filter from './Components/U1-New/Filter';
 import List from './Components/U1-New/List';
 import { create, read, destroy, edit } from './Components/U1-New/localStorage';
 import './Components/U1-New/style.scss';
@@ -17,6 +18,26 @@ function App() {
     const [editModal, setEditModal] = useState(null);
     const [totalBalances, setTotalBalances] = useState(0);
     const [numAccounts, setNumAccounts] = useState(0);
+    const [filter, setFilter] = useState('all');
+    const [deleteSuccessMsg, setDeleteSuccessMsg] = useState(null);
+    const [editSuccessMsg, setEditSuccessMsg] = useState(null);
+
+    useEffect(() => {
+        if (deleteSuccessMsg) {
+            setTimeout(() => {
+                setDeleteSuccessMsg(null);
+            }, 2000);
+        }
+    }, [deleteSuccessMsg]);
+
+
+    useEffect(() => {
+        if (editSuccessMsg) {
+            setTimeout(() => {
+                setEditSuccessMsg(null);
+            }, 2000);
+        }
+    }, [editSuccessMsg]);
 
 
     useEffect(() => {
@@ -36,6 +57,7 @@ function App() {
             return;
         }
         destroy(KEY, deleteData.id);
+        setDeleteSuccessMsg("Account was successfully deleted");
         setLastUpdate(Date.now());
     }, [deleteData]);
 
@@ -44,6 +66,7 @@ function App() {
             return;
         }
         edit(KEY, editData, editData.id);
+        setEditSuccessMsg("Balance was successfully changed");
         setLastUpdate(Date.now());
     }, [editData]);
 
@@ -75,8 +98,14 @@ function App() {
                             setDeleteData={setDeleteData}
                             editModal={editModal}
                             setEditModal={setEditModal}
-                            setEditData={setEditData}                                                  
+                            setEditData={setEditData} 
+                            filter={filter}
+                            deleteSuccessMsg={deleteSuccessMsg} 
+                            editSuccessMsg={editSuccessMsg}                                                
                         />
+                    </div>
+                    <div className='filter'>
+                        <Filter setFilter={setFilter} />
                     </div>
                 </div>
             </div>

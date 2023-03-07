@@ -5,7 +5,7 @@ function Create({setCreateData}) {
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');  
-    const [balance, setBalance] = useState(null);  
+    const [balance, setBalance] = useState(0);  
     
 
     const create = _ => {

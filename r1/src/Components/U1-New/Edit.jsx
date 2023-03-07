@@ -1,20 +1,29 @@
 import { useState } from 'react';
 
 function Edit({ setEditData, setEditModal, editModal }) {
-  const [name, setName] = useState(editModal.name);
-  const [surname, setSurname] = useState(editModal.surname);
-  const [balance, setBalance] = useState(editModal.balance);
-  const [amount, setAmount] = useState(0);
+    const [name, setName] = useState(editModal.name);
+    const [surname, setSurname] = useState(editModal.surname);
+    const [balance, setBalance] = useState(editModal.balance);
+    const [amount, setAmount] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
-  const handleAddFunds = () => {
-    setBalance(balance + amount);
-    setAmount(0);
-  };
+    const handleAddFunds = () => {
+        setBalance(balance + amount);
+        setAmount(0);
+    };
 
-  const handleWithdrawFunds = () => {
-    setBalance(balance - amount);
-    setAmount(0);
-  };
+    const handleWithdrawFunds = () => {
+        if (balance - amount < 0) {
+            setErrorMessage('There is not enough money in account.');
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 2000);
+        } else {
+            setBalance(balance - amount);
+            setAmount(0);
+            setErrorMessage('');
+        }
+    };
 
   const saveChanges = () => {
     setEditData({
@@ -37,11 +46,11 @@ function Edit({ setEditData, setEditModal, editModal }) {
         <div className='input-container'>
             <div className="input-group">
                 <label className='label-amount'>Amount to change:</label>
-                <input type="text" value={amount} onChange={(e) => setAmount(parseInt(e.target.value))} />
+                <input className='input-white' type="text" value={amount} onChange={(e) => setAmount(parseInt(e.target.value))} />
             </div>
             <div className="input-group">
                 <label className='label-balance'>Current balance:</label>
-                <input type="text" value={balance} onChange={(e) => setBalance(parseInt(e.target.value))} />
+                <input className='input-grey' type="text" value={balance} onChange={(e) => setBalance(parseInt(e.target.value))} />
             </div>
         </div>
 
@@ -51,6 +60,11 @@ function Edit({ setEditData, setEditModal, editModal }) {
         <button className="bottom-btn" onClick={() => setEditModal(null)}>
           Cancel
         </button>
+
+        <div className='msg'>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+        </div>
+
       </div>
     </>
   );
