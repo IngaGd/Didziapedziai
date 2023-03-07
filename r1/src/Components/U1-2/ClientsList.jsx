@@ -3,7 +3,7 @@ import EditAccount from "./EditAccount";
 
 function ClientsList({list, setDeleteModal, deleteModal, setDeleteAccount, editModal, setEditModal, setEditAccount}) {
 
-    if (null === list) { //dar negavome duomenu is serverio
+    if (null === list) { 
         return (
             <div className="load">Loading...</div>
         )

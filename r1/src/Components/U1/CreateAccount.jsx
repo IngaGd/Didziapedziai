@@ -1,48 +1,44 @@
 import { useState } from "react";
 
 
-const selectAccountType = [
-    {text: 'Economy', value: 'e'},
-    {text: 'Standard', value: 's'},
-    {text: 'Premium', value: 'p'},    
-]
+// const selectAccountType = [
+//     {text: 'Economy', value: 'e'},
+//     {text: 'Standard', value: 's'},
+//     {text: 'Premium', value: 'p'},    
+// ]
 
-const cardType = [
-    {text: 'Master Card', value: 'mc'},
-    {text: 'Visa', value: 'v'},    
-]
+// const cardType = [
+//     {text: 'Master Card', value: 'mc'},
+//     {text: 'Visa', value: 'v'},    
+// ]
 
 function CreateAccount({setCreateAccount}) {
 
-    const [clientInfo, setClientInfo] = useState([]);
+    // const [clientInfo, setClientInfo] = useState([]);
 
 
     const [clientName, setClientName] = useState('');
     const [clientSurname, setClientSurname] = useState('');
-    const [accountType, setAccountType] = useState('');
-    const [card, setCard] = useState(null);
+    // const [accountType, setAccountType] = useState('');
+    // const [card, setCard] = useState(null);
     const [balance, setBalance] = useState(0);
 
     const create = _ => {
         setCreateAccount({
-            name: clientName, 
-            surname: clientSurname,
-            accountType: accountType,
-            card: card,
+            clientName: clientName, 
+            clientSurname: clientSurname,
             balance: parseInt(balance)
         });
         setClientName('');
         setClientSurname('');
-        setAccountType('');
+        setBalance(0)
     }
 
     const inputControl1 = e => {
-        console.log(clientName);
         setClientName(e.target.value);   
     }
 
     const inputControl2 = e => {
-        console.log(clientSurname);
         setClientSurname(e.target.value); 
     }
 
@@ -50,28 +46,25 @@ function CreateAccount({setCreateAccount}) {
         setBalance(e.target.value); 
     }
 
-    const selection = e => {
-        setAccountType(e.target.value);
-    }
 
-    const showClientInfo = e => {
-        setClientInfo(c => [{clientName, clientSurname, accountType, card}, ...c]);
-        setClientName('');
-        setClientSurname('');
-    }
+    // const showClientInfo = e => {
+    //     setClientInfo(c => [{clientName, clientSurname, balance}, ...c]);
+    //     setClientName('');
+    //     setClientSurname('');
+    // }
 
-    const cardTypeSelecting = v => {
-        setCard(v);//neberikia pervaziuoti visus, pasiliekam tik ta, kuris pazymetas
-    }
+    // const cardTypeSelecting = v => {
+    //     setCard(v);//neberikia pervaziuoti visus, pasiliekam tik ta, kuris pazymetas
+    // }
 
 
     return (
         <>
-        <h2 className="clients">
+        {/* <h2 className="clients">
             {
                 clientInfo.map((c, i) => <div key={i}> {c.clientName} {c.clientSurname} {selectAccountType.find(s => s.value === c.accountType).text} {cardType.find(s => s.value === c.card).text}</div>)
             } 
-        </h2>
+        </h2> */}
         <div className="form">
 
             <label>Client name</label>
@@ -80,14 +73,14 @@ function CreateAccount({setCreateAccount}) {
             <label>Client surname</label>
             <input type="text" value={clientSurname} onChange={inputControl2}/>
 
-            <label>Account type</label>
+            {/* <label>Account type</label>
             <select className="select" value={accountType} onChange={selection}>
                 {
                     selectAccountType.map(s => <option key={s.value} value={s.value}>{s.text}</option>)
                 }
-            </select>
+            </select> */}
 
-            <label>Card type</label>
+            {/* <label>Card type</label>
             <div className='cb-bin'>
                 {
                     cardType.map(c => <span key={c.value}>
@@ -96,7 +89,7 @@ function CreateAccount({setCreateAccount}) {
                     <label className='cb' htmlFor={'r_' + c.value}>{c.text}</label> 
                     </span>)
                 }
-            </div>
+            </div> */}
 
             <label>Account balance</label>
             <input type="text" value={balance} onChange={inputControl3}/>
