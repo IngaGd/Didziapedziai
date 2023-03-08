@@ -36,7 +36,7 @@ function List({list, setDeleteModal, deleteModal, setDeleteData, setEditModal, e
     return (
         <>
             <div className="title">
-                List of clients
+                List of accounts
             </div>
             <div className="client-list">
                 {
