@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import GlobalSqContext from "./GlobalSqContext";
+import {GlobalSqContext} from "./GlobalSqContext";
 import GlobalUserContext from "./GlobalUserContext";
 
 function BoxSmall() {
 
+    //destrukturizuidami pasiimam sq1 ir sq2
     const {sq1, sq2} = useContext(GlobalSqContext);
     const {user} = useContext(GlobalUserContext);    
 

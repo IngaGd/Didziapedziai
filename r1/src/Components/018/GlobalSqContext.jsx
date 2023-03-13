@@ -1,9 +1,20 @@
-import { createContext } from "react";
+import { createContext, useState } from 'react';
 
-const GlobalSqContext = createContext();
+export const GlobalSqContext = createContext();
 
+export const GlobalSqContextProvider = ({children}) => {
 
-export default GlobalSqContext;
+    const [sq1, setSq1] = useState([]);
+    const [sq2, setSq2] = useState([]);
+
+    return (
+        <GlobalSqContext.Provider value={{ sq1, sq2, setSq1, setSq2 }}>
+            {children}
+        </GlobalSqContext.Provider>
+    );
+
+}
+
 
 
 //visai aplikaicijai duoda squerus, t.y. apima visa aplikacija
