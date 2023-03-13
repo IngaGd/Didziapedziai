@@ -4,7 +4,7 @@ import List from './Components/Dices-Server/List';
 import './Components/Dices-Server/style.scss';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import Messages from './Components/Dices/Messages';
+import Messages from './Components/Dices-Server/Messages';
 
 const URL = 'http://localhost:3003/dices';
 

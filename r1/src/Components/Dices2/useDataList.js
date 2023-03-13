@@ -7,5 +7,5 @@ export const useDataList = init => {
     const [lastUpdate, setLastUpdate] = useState(Date.now());
 
 
-    [list, setLastUpdate];
+    return [list, setLastUpdate];
 }

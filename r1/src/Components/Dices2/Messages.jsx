@@ -1,11 +1,9 @@
-
-import { useContext } from 'react';
-import { GlobalContext } from './GlobalContext';
+import { useContext } from "react";
+import { GlobalContext } from "./GlobalContext";
 
 function Messages() {
 
     const {messages} = useContext(GlobalContext);
-
 
     return (
         <div className="messages">
