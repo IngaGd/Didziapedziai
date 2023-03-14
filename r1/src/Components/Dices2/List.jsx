@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import Delete from "./Delete";
 import Edit from "./Edit";
+import { GlobalContext } from "./GlobalContext";
 
-function List({list, setDeleteModal, deleteModal, setDeleteData, setEditModal, editModal, setEditData}) {
+function List({setEditData}) {
+
+    const {setDeleteModal, deleteModal, setDeleteData, editModal, setEditModal, list} = useContext(GlobalContext);
 
     if (null === list) { //jei useState(null), vadinasi dar negavom is serverio jokiu duomenu
         return (

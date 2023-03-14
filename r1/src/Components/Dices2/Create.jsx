@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useState } from "react";
 import mutateColor from '../../Functions/mutateColor'
+import { GlobalContext } from "./GlobalContext";
 
 const dicesCb = [
     {v: 1, t: 'One'},
@@ -11,11 +13,13 @@ const dicesCb = [
 ]
 
 
-function Create({setCreateData}) {
+function Create() {
 
     const [number, setNumber] = useState(1);
     const [size, setSize] = useState(100);  
-    const [color, setColor] = useState('#ffffff');  
+    const [color, setColor] = useState('#ffffff');
+    
+    const {setCreateData} = useContext(GlobalContext);
     
     //funkcijos apiforminimas, kuri atliks perdavima state'u i setCreateData
     const create = _ => {
